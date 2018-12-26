@@ -2,24 +2,27 @@ import React from 'react'
 import Link from 'gatsby-link'
 import { HelmetDatoCms } from 'gatsby-source-datocms'
 import Img from 'gatsby-image'
+import Layout from '../components/layout';
 
 const About = ({ data: { about } }) => (
-  <article className="sheet">
-    <HelmetDatoCms seo={about.seoMetaTags} />
-    <div className="sheet__inner">
-      <h1 className="sheet__title">{about.title}</h1>
-      <p className="sheet__lead">{about.subtitle}</p>
-      <div className="sheet__gallery">
-        <Img sizes={about.photo.sizes} />
+  <Layout>
+    <article className="sheet">
+      <HelmetDatoCms seo={about.seoMetaTags} />
+      <div className="sheet__inner">
+        <h1 className="sheet__title">{about.title}</h1>
+        <p className="sheet__lead">{about.subtitle}</p>
+        <div className="sheet__gallery">
+          <Img sizes={about.photo.sizes} />
+        </div>
+        <div
+          className="sheet__body"
+          dangerouslySetInnerHTML={{
+            __html: about.bioNode.childMarkdownRemark.html,
+          }}
+        />
       </div>
-      <div
-        className="sheet__body"
-        dangerouslySetInnerHTML={{
-          __html: about.bioNode.childMarkdownRemark.html,
-        }}
-      />
-    </div>
-  </article>
+    </article>
+  </Layout>
 )
 
 export default About
